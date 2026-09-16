@@ -42,4 +42,20 @@ export const APP_STRINGS = {
       },
     },
   },
+  PALETTE: {
+    TITLE: 'Components',
+    DRAG_HINT: 'Drag onto canvas',
+  },
+  PROPERTIES: {
+    TITLE: 'Properties',
+    EMPTY: 'Select a node to edit',
+    NAME: 'Name',
+    CONNECTIONS: 'Connections',
+    NO_CONNECTIONS: 'No connections yet',
+    DELETE: 'Delete Node',
+  },
+  CANVAS: {
+    EMPTY_TITLE: 'Add your first component',
+    EMPTY_DESC: 'Drag a PC or a Router from the left panel onto the canvas to begin.',
+  },
 } as const;

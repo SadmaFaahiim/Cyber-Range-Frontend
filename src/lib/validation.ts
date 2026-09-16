@@ -52,3 +52,14 @@ export function computeReadiness(nodes: TopologyNode[], edges: TopologyEdge[]): 
 
   return { status: issues.length === 0 ? 'ready' : 'warning', issues };
 }
+
+export interface ReadinessPayload {
+  infrastructure: boolean;
+  overall: boolean;
+}
+
+export function validateReadiness(nodes: TopologyNode[], edges: TopologyEdge[]): ReadinessPayload {
+  const report = computeReadiness(nodes, edges);
+  const ready = report.status === 'ready';
+  return { infrastructure: ready, overall: ready };
+}
