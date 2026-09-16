@@ -71,6 +71,34 @@
   --glass-shadow: rgba(148, 163, 184, 0.15);
 }
 
+.dark {
+  --background: oklch(0.15 0.01 260);
+  --foreground: oklch(0.93 0.01 260);
+  --card: rgba(19, 23, 34, 0.75);
+  --card-foreground: oklch(0.93 0.01 260);
+  --popover: rgba(17, 21, 32, 0.85);
+  --popover-foreground: oklch(0.93 0.01 260);
+  --primary: oklch(0.706 0.151 237);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.23 0.01 260);
+  --secondary-foreground: oklch(0.93 0.01 260);
+  --muted: oklch(0.21 0.01 260);
+  --muted-foreground: #94a3b8;
+  --accent: #38bdf8;
+  --accent-foreground: oklch(1 0 0);
+  --destructive: #ef4444;
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.28 0.01 260);
+  --input: oklch(0.28 0.01 260);
+  --ring: #38bdf8;
+
+  --app-bg: #07090f;
+  --panel-bg: rgba(15, 18, 26, 0.6);
+  --panel-border: rgba(38, 47, 56, 0.8);
+  --canvas-bg: #07090f;
+  --glass-shadow: rgba(0, 0, 0, 0.24);
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -91,9 +119,17 @@
   }
 }
 
+.dark body {
+  background: linear-gradient(135deg, #0b0f1a 0%, #0e1220 50%, #0a0f1c 100%);
+}
+
 .canvas-dot-grid {
   background-image: radial-gradient(circle, rgba(14, 165, 233, 0.15) 1px, transparent 1px);
   background-size: 20px 20px;
+}
+
+.dark .canvas-dot-grid {
+  background-image: radial-gradient(circle, rgba(148, 163, 184, 0.14) 1px, transparent 1px);
 }
 
 @keyframes cable-flow {
@@ -104,4 +140,12 @@
 
 .cable-flow {
   animation: cable-flow 1.2s linear infinite;
+  transition:
+    stroke-width 0.15s ease,
+    filter 0.15s ease;
+}
+
+.react-flow__edge:hover .cable-flow {
+  stroke-width: 3;
+  filter: drop-shadow(0 0 5px var(--edge-color, var(--accent)));
 }

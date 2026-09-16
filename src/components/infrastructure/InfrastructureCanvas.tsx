@@ -4,10 +4,8 @@ import {
   BackgroundVariant,
   type Connection,
   Controls,
-  type EdgeTypes,
   MiniMap,
   type NodeChange,
-  type NodeTypes,
   type OnConnect,
   ReactFlow,
   type ReactFlowInstance,
@@ -16,18 +14,13 @@ import {
 } from '@xyflow/react';
 import { type DragEvent, type MouseEvent as ReactMouseEvent, useCallback, useEffect, useRef } from 'react';
 
-import CableEdge from '@/components/topology/edges/CableEdge';
-import PCNode from '@/components/topology/nodes/PCNode';
-import RouterNode from '@/components/topology/nodes/RouterNode';
+import { edgeTypes, nodeTypes } from '@/components/topology/flowTypes';
 import { DEFAULT_NODE_SIZE, INFRASTRUCTURE_COMPONENTS, SNAP_GRID } from '@/data/infrastructure-components';
 import { APP_STRINGS } from '@/lib/strings';
 import { formatNodeId } from '@/lib/utils';
 import { validateReadiness } from '@/lib/validation';
 import useCyberRangeStore from '@/store/cyberRangeStore';
 import type { TopologyEdge, TopologyNode, TopologyNodeType } from '@/types/topology';
-
-const nodeTypes = { pc: PCNode, router: RouterNode } satisfies NodeTypes;
-const edgeTypes = { cable: CableEdge } satisfies EdgeTypes;
 
 export default function InfrastructureCanvas() {
   const canvasNodes = useCyberRangeStore((state) => state.canvasNodes);
@@ -164,7 +157,8 @@ export default function InfrastructureCanvas() {
           zoomable
           bgColor="var(--color-panel-bg)"
           nodeColor="var(--color-accent)"
-          maskColor="rgba(255, 255, 255, 0.6)"
+          maskColor="var(--color-panel-bg)"
+          className="dark:opacity-80"
         />
       </ReactFlow>
 

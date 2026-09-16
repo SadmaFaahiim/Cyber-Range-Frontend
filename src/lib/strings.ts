@@ -77,5 +77,21 @@ export const APP_STRINGS = {
       { key: 'hasConnections', label: 'Nodes connected with cables' },
       { key: 'noOverlap', label: 'No overlapping nodes' },
     ],
+    SUMMARY: {
+      subtitle: 'Final output of your cyber-range exercise',
+      stats: {
+        nodes: 'Total Nodes',
+        cables: 'Cables',
+        valid: 'Signal OK',
+        warn: 'Warnings',
+        launchedAt: 'Launched At',
+      },
+      previewTitle: 'Network Preview',
+      logTitle: 'Connection Log',
+      signalOk: 'Signal OK',
+      signalWarn: 'Wrong Connection',
+      ctaBack: 'Back to Dashboard',
+      ctaNew: 'New Exercise',
+    },
   },
 } as const;

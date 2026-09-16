@@ -6,6 +6,7 @@ import ComponentPalette from '@/components/infrastructure/ComponentPalette';
 import InfrastructureCanvas from '@/components/infrastructure/InfrastructureCanvas';
 import PropertiesPanel from '@/components/infrastructure/PropertiesPanel';
 import { Button } from '@/components/ui/button';
+import { pageTransition } from '@/lib/motion';
 import { APP_STRINGS } from '@/lib/strings';
 import { validateInfrastructureCanvas } from '@/lib/validation';
 import useCyberRangeStore from '@/store/cyberRangeStore';
@@ -27,10 +28,10 @@ export default function InfrastructureBuilderPage() {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
+      initial={pageTransition.initial}
+      animate={pageTransition.animate}
+      exit={pageTransition.exit}
+      transition={pageTransition.transition}
       className="flex h-full w-full flex-col"
     >
       <div className="flex min-h-0 flex-1">
@@ -39,7 +40,7 @@ export default function InfrastructureBuilderPage() {
         <PropertiesPanel />
       </div>
 
-      <footer className="flex h-14 shrink-0 items-center justify-between gap-4 border-t border-white/80 bg-white/70 px-6 shadow-[0_-2px_12px_rgba(148,163,184,0.1)] backdrop-blur-[8px]">
+      <footer className="flex h-14 shrink-0 items-center justify-between gap-4 border-t border-panel-border bg-panel-bg px-6 shadow-[0_-2px_12px_var(--glass-shadow)] backdrop-blur-[8px]">
         {valid ? (
           <p className="text-sm text-ready">{APP_STRINGS.BUILDER.READY_TEXT}</p>
         ) : (
