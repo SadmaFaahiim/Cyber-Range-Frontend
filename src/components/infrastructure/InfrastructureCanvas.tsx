@@ -157,14 +157,14 @@ export default function InfrastructureCanvas() {
         snapGrid={SNAP_GRID}
         deleteKeyCode={null}
       >
-        <Background variant={BackgroundVariant.Dots} gap={20} size={1} color="#1b2230" />
+        <Background variant={BackgroundVariant.Dots} gap={20} size={1} color="rgba(14, 165, 233, 0.15)" />
         <Controls />
         <MiniMap
           pannable
           zoomable
           bgColor="var(--color-panel-bg)"
           nodeColor="var(--color-accent)"
-          maskColor="rgba(7, 9, 15, 0.7)"
+          maskColor="rgba(255, 255, 255, 0.6)"
         />
       </ReactFlow>
 

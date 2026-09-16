@@ -32,7 +32,7 @@ function CableEdgeComponent({ id, sourceX, sourceY, targetX, targetY, sourcePosi
         <button
           type="button"
           onClick={() => removeEdge(id)}
-          className="nodrag nopan flex h-5 w-5 items-center justify-center rounded-full border border-panel-border bg-panel-bg text-xs text-muted-foreground transition-colors hover:border-warning hover:text-warning"
+          className="nodrag nopan flex h-5 w-5 items-center justify-center rounded-full border border-slate-300/80 bg-white/80 text-xs text-slate-500 transition-colors hover:border-accent hover:text-accent"
           style={{
             position: 'absolute',
             transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
