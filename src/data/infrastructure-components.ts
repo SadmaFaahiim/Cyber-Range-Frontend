@@ -1,9 +1,9 @@
 export interface PaletteComponent {
-  type: 'pc' | 'router';
+  type: 'pc' | 'router' | 'cable';
   label: string;
   description: string;
   icon: string;
-  defaultName: string;
+  defaultName?: string;
 }
 
 export const DEFAULT_NODE_SIZE = { width: 120, height: 80 };
@@ -24,5 +24,11 @@ export const INFRASTRUCTURE_COMPONENTS: PaletteComponent[] = [
     description: 'Network routing device',
     icon: 'RouterIcon',
     defaultName: 'Router',
+  },
+  {
+    type: 'cable',
+    label: 'Cable',
+    description: 'Connect nodes with a network cable',
+    icon: 'Cable',
   },
 ];

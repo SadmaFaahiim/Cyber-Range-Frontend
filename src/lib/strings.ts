@@ -51,10 +51,14 @@ export const APP_STRINGS = {
   BUILDER: {
     NO_NODES: 'Add at least 2 nodes and connect them with a cable to continue.',
     READY_TEXT: 'Your infrastructure is ready for review.',
+    CABLE_PICK_SOURCE: 'Click the first node the cable should leave from.',
+    CABLE_PICK_TARGET: 'Now click the node to connect the cable to.',
+    CABLE_CANCEL: 'Cancel Cable',
   },
   PALETTE: {
     TITLE: 'Components',
     DRAG_HINT: 'Drag onto canvas',
+    CABLE_HINT: 'Click to add cables',
   },
   PROPERTIES: {
     TITLE: 'Properties',

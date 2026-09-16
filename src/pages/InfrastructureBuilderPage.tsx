@@ -16,6 +16,9 @@ export default function InfrastructureBuilderPage() {
   const canvasNodes = useCyberRangeStore((state) => state.canvasNodes);
   const canvasEdges = useCyberRangeStore((state) => state.canvasEdges);
   const setStep = useCyberRangeStore((state) => state.setStep);
+  const cablePlacementActive = useCyberRangeStore((state) => state.cablePlacementActive);
+  const cablePlacementSourceId = useCyberRangeStore((state) => state.cablePlacementSourceId);
+  const setCablePlacementActive = useCyberRangeStore((state) => state.setCablePlacementActive);
   const valid = validateInfrastructureCanvas(canvasNodes, canvasEdges);
 
   const handleContinue = () => {
@@ -41,17 +44,30 @@ export default function InfrastructureBuilderPage() {
       </div>
 
       <footer className="flex h-14 shrink-0 items-center justify-between gap-4 border-t border-panel-border bg-panel-bg px-6 shadow-[0_-2px_12px_var(--glass-shadow)] backdrop-blur-[8px]">
-        {valid ? (
-          <p className="text-sm text-ready">{APP_STRINGS.BUILDER.READY_TEXT}</p>
+        <div className="min-w-0 flex-1">
+          {cablePlacementActive ? (
+            <p className="truncate text-sm font-medium text-accent">
+              {cablePlacementSourceId ? APP_STRINGS.BUILDER.CABLE_PICK_TARGET : APP_STRINGS.BUILDER.CABLE_PICK_SOURCE}
+            </p>
+          ) : valid ? (
+            <p className="text-sm text-ready">{APP_STRINGS.BUILDER.READY_TEXT}</p>
+          ) : (
+            <p className="flex items-center gap-2 text-sm text-warning">
+              <AlertTriangle className="h-4 w-4 shrink-0" aria-hidden="true" />
+              {APP_STRINGS.BUILDER.NO_NODES}
+            </p>
+          )}
+        </div>
+
+        {cablePlacementActive ? (
+          <Button variant="outline" size="sm" onClick={() => setCablePlacementActive(false)}>
+            {APP_STRINGS.BUILDER.CABLE_CANCEL}
+          </Button>
         ) : (
-          <p className="flex items-center gap-2 text-sm text-warning">
-            <AlertTriangle className="h-4 w-4 shrink-0" aria-hidden="true" />
-            {APP_STRINGS.BUILDER.NO_NODES}
-          </p>
+          <Button data-testid="continue-button" onClick={handleContinue} disabled={!valid}>
+            {APP_STRINGS.PAGES.BUILD.ctaPrimary}
+          </Button>
         )}
-        <Button data-testid="continue-button" onClick={handleContinue} disabled={!valid}>
-          {APP_STRINGS.PAGES.BUILD.ctaPrimary}
-        </Button>
       </footer>
     </motion.div>
   );
