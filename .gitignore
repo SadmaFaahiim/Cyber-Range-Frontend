@@ -8,20 +8,13 @@ dist-ssr/
 # Environment
 .env
 .env.*
-.env.local
-!.env.example
+*.local
 
 # Test output
 coverage/
-test-results/
 playwright-report/
+test-results/
 blob-report/
-
-# IDE / Editor
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
-.idea/
 
 # OS files
 .DS_Store
@@ -30,11 +23,7 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-pnpm-debug.log*
 
 # Misc
+.vite/
 *.tsbuildinfo
-*.local
-*.md5
-.history/

@@ -1,43 +1,38 @@
 ---
 name: Bug report
-about: Report a defect in the Cyber Range GUI
-title: '[bug]: '
-labels: ['bug']
-assignees: ''
+about: Report a bug in the Cyber Range GUI
+title: "fix: <short bug description>"
+labels: bug
+assignees: ""
 ---
 
-## Description
+## Bug description
 
-<!-- What is broken? Describe the behavior briefly and clearly. -->
+<!-- What is the bug? Include observed symptoms. -->
 
 ## Steps to reproduce
 
-1. Go to '...'
-2. Click on '...'
-3. Scroll to '...'
-4. See error
+1. <!-- Step 1 -->
+2. <!-- Step 2 -->
+3. <!-- Step 3 -->
 
-## Expected vs actual
+## Expected behavior
 
-**Expected:** <!-- what should happen -->
+<!-- What should happen instead? -->
 
-**Actual:** <!-- what happens instead -->
+## Actual behavior
 
-## Where it occurs
+<!-- What actually happens? Paste error messages or console output if any. -->
 
-- **Page/route:** <!-- e.g. /infrastructure/:id, /tools, /ready -->
-- **Component:** <!-- e.g. TopologyCanvas, Stepper, ToolGrid, FirewallNode -->
+## Which page or component is affected
 
-## Environment
+<!-- e.g. InfrastructureBuilderPage, InfrastructureCanvas, ComponentPalette, PropertiesPanel, Stepper -->
 
-- **Browser:** <!-- e.g. Chrome 122, Firefox 123, Edge 122 -->
-- **OS:** <!-- e.g. Windows 11, macOS 14, Ubuntu 24.04 -->
-- **App version / branch:** <!-- e.g. develop / feature/topology -->
+## Browser and OS
 
-## Screenshots
+- Browser / version:
+- OS / version:
 
-<!-- Attach screenshots or a short screen recording. For topology issues, include the node types involved. -->
+## Screenshots or recordings
 
-## Additional context
-
-<!-- Any logs, error messages, or console output that helps isolate the issue. -->
+<!-- Attach screenshots or links to screen recordings. -->
