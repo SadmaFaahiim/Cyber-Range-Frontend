@@ -31,7 +31,7 @@ export default function InfrastructureBuilderPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="flex h-full flex-col"
+      className="flex h-full w-full flex-col"
     >
       <div className="flex min-h-0 flex-1">
         <ComponentPalette />
