@@ -27,13 +27,19 @@ export const APP_STRINGS = {
       ctaPrimary: 'Continue to Review',
     },
     REVIEW: {
-      title: 'Review Environment',
+      title: 'Review Infrastructure',
       description: 'Confirm your infrastructure is complete before going live.',
-      ctaPrimary: 'Mark Ready',
+      ctaPrimary: 'Continue to Readiness',
+      nodesLabel: 'Nodes',
+      edgesLabel: 'Cables',
+      status: {
+        ready: 'Ready',
+        incomplete: 'Incomplete',
+      },
     },
     READY: {
-      title: 'Environment Ready',
-      description: 'Your cyber-range environment is ready for the exercise.',
+      title: 'Exercise Readiness',
+      description: 'Your cyber-range environment is ready to be reviewed and launched.',
       ctaPrimary: 'Back to Dashboard',
       status: {
         ready: 'Ready',
@@ -41,6 +47,10 @@ export const APP_STRINGS = {
         none: 'Not Started',
       },
     },
+  },
+  BUILDER: {
+    NO_NODES: 'Add at least 2 nodes and connect them with a cable to continue.',
+    READY_TEXT: 'Your infrastructure is ready for review.',
   },
   PALETTE: {
     TITLE: 'Components',
@@ -57,5 +67,15 @@ export const APP_STRINGS = {
   CANVAS: {
     EMPTY_TITLE: 'Add your first component',
     EMPTY_DESC: 'Drag a PC or a Router from the left panel onto the canvas to begin.',
+  },
+  READINESS: {
+    LAUNCHED_TITLE: 'Exercise Launched',
+    LAUNCHED_DESC: 'Your cyber-range exercise is now running.',
+    LAUNCH_LABEL: 'Launch Exercise',
+    CHECKLIST: [
+      { key: 'hasNodes', label: 'At least 2 nodes placed' },
+      { key: 'hasConnections', label: 'Nodes connected with cables' },
+      { key: 'noOverlap', label: 'No overlapping nodes' },
+    ],
   },
 } as const;

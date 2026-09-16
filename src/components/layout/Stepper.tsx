@@ -16,7 +16,11 @@ export default function Stepper() {
         const isActive = stepNumber === currentStep;
 
         return (
-          <li key={step.id} className="flex items-center">
+          <li
+            key={step.id}
+            data-state={isActive ? 'active' : isComplete ? 'complete' : 'inactive'}
+            className="flex items-center"
+          >
             {isActive ? (
               <motion.div
                 layoutId="active-step"
