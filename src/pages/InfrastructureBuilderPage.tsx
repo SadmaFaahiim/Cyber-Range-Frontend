@@ -1,6 +1,8 @@
 import { motion } from 'motion/react';
 
-import { APP_STRINGS } from '@/lib/strings';
+import ComponentPalette from '@/components/infrastructure/ComponentPalette';
+import InfrastructureCanvas from '@/components/infrastructure/InfrastructureCanvas';
+import PropertiesPanel from '@/components/infrastructure/PropertiesPanel';
 
 export default function InfrastructureBuilderPage() {
   return (
@@ -9,9 +11,11 @@ export default function InfrastructureBuilderPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="flex h-full items-center justify-center"
+      className="flex h-full"
     >
-      <h1 className="text-xl font-semibold text-foreground">{APP_STRINGS.PAGES.BUILD.title}</h1>
+      <ComponentPalette />
+      <InfrastructureCanvas />
+      <PropertiesPanel />
     </motion.div>
   );
 }

@@ -13,6 +13,7 @@
   --color-ready: #22c55e;
   --color-warning: #f59e0b;
   --color-disabled: #6b7280;
+  --color-canvas-bg: #07090f;
 
   --color-background: oklch(0.145 0 0);
   --color-foreground: oklch(0.985 0 0);
@@ -51,4 +52,19 @@
   body {
     @apply bg-app-bg text-foreground font-sans antialiased;
   }
+}
+
+.canvas-dot-grid {
+  background-image: radial-gradient(circle, #1b2230 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+@keyframes cable-flow {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
+
+.cable-flow {
+  animation: cable-flow 1.2s linear infinite;
 }
