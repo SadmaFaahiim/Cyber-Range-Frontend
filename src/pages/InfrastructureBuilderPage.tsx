@@ -31,7 +31,7 @@ export default function InfrastructureBuilderPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="flex h-full flex-col"
+      className="flex h-full w-full flex-col"
     >
       <div className="flex min-h-0 flex-1">
         <ComponentPalette />
@@ -39,7 +39,7 @@ export default function InfrastructureBuilderPage() {
         <PropertiesPanel />
       </div>
 
-      <footer className="flex h-14 shrink-0 items-center justify-between gap-4 border-t border-panel-border bg-panel-bg px-6">
+      <footer className="flex h-14 shrink-0 items-center justify-between gap-4 border-t border-white/80 bg-white/70 px-6 shadow-[0_-2px_12px_rgba(148,163,184,0.1)] backdrop-blur-[8px]">
         {valid ? (
           <p className="text-sm text-ready">{APP_STRINGS.BUILDER.READY_TEXT}</p>
         ) : (

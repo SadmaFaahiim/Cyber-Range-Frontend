@@ -47,27 +47,35 @@ export default function ReadinessPage() {
     >
       <h1 className="text-3xl font-semibold tracking-tight text-foreground">{APP_STRINGS.PAGES.READY.title}</h1>
 
-      <ul className="flex flex-col gap-2" data-testid="readiness-checklist">
+      <ul
+        className="flex w-80 flex-col gap-2 rounded-lg border border-white/85 bg-white/65 p-3 shadow-[0_8px_32px_rgba(148,163,184,0.15)] backdrop-blur-[16px]"
+        data-testid="readiness-checklist"
+      >
         {APP_STRINGS.READINESS.CHECKLIST.map((item) => {
           const passed = report.checks[item.key];
           return (
             <li
               key={item.key}
               data-state={passed ? 'pass' : 'fail'}
-              className="flex w-80 items-center gap-3 rounded-md border border-panel-border bg-panel-bg px-4 py-2.5"
+              className="flex items-center gap-3 rounded-md border border-slate-200/70 bg-white/70 px-4 py-2.5"
             >
               {passed ? (
                 <Check className="h-4 w-4 shrink-0 text-ready" aria-hidden="true" />
               ) : (
                 <X className="h-4 w-4 shrink-0 text-warning" aria-hidden="true" />
               )}
-              <span className="text-sm text-foreground">{item.label}</span>
+              <span className="text-sm text-slate-700">{item.label}</span>
             </li>
           );
         })}
       </ul>
 
-      <Button data-testid="launch-button" onClick={() => setLaunched(true)} disabled={!report.overall}>
+      <Button
+        data-testid="launch-button"
+        onClick={() => setLaunched(true)}
+        disabled={!report.overall}
+        className={report.overall ? 'shadow-[0_0_20px_rgba(14,165,233,0.4)]' : undefined}
+      >
         {APP_STRINGS.READINESS.LAUNCH_LABEL}
       </Button>
     </motion.div>

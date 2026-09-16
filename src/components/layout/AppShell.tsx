@@ -21,7 +21,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
   }, [currentStep, location.pathname, navigate]);
 
   return (
-    <div className="flex h-screen flex-col bg-app-bg">
+    <div className="flex h-screen flex-col bg-transparent">
       <Header />
       <main className="flex flex-1 overflow-hidden">{children}</main>
     </div>
