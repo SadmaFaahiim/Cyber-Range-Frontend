@@ -8,6 +8,8 @@ export interface CyberRangeState {
   canvasEdges: TopologyEdge[];
   selectedNodeId: string | null;
   infrastructureMode: 'builder';
+  cablePlacementActive: boolean;
+  cablePlacementSourceId: string | null;
   readiness: {
     infrastructure: boolean;
     overall: boolean;
@@ -24,6 +26,8 @@ export interface CyberRangeActions {
   removeEdge: (id: string) => void;
   selectNode: (id: string | null) => void;
   updateReadiness: (readiness: { infrastructure: boolean; overall: boolean }) => void;
+  setCablePlacementActive: (active: boolean) => void;
+  setCablePlacementSourceId: (id: string | null) => void;
   reset: () => void;
 }
 
@@ -35,6 +39,8 @@ const useCyberRangeStore = create<CyberRangeState & CyberRangeActions>()((set) =
   canvasEdges: [],
   selectedNodeId: null,
   infrastructureMode: 'builder',
+  cablePlacementActive: false,
+  cablePlacementSourceId: null,
   readiness: { ...INITIAL_READINESS },
 
   setStep: (step) => set({ currentStep: step }),
@@ -70,12 +76,18 @@ const useCyberRangeStore = create<CyberRangeState & CyberRangeActions>()((set) =
 
   updateReadiness: (readiness) => set({ readiness }),
 
+  setCablePlacementActive: (active) => set({ cablePlacementActive: active, cablePlacementSourceId: null }),
+
+  setCablePlacementSourceId: (id) => set({ cablePlacementSourceId: id }),
+
   reset: () =>
     set({
       currentStep: 1,
       canvasNodes: [],
       canvasEdges: [],
       selectedNodeId: null,
+      cablePlacementActive: false,
+      cablePlacementSourceId: null,
       readiness: { ...INITIAL_READINESS },
     }),
 }));

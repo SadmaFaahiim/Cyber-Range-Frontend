@@ -30,6 +30,10 @@ export default function InfrastructureCanvas() {
   const selectNode = useCyberRangeStore((state) => state.selectNode);
   const updateNodePosition = useCyberRangeStore((state) => state.updateNodePosition);
   const updateReadiness = useCyberRangeStore((state) => state.updateReadiness);
+  const cablePlacementActive = useCyberRangeStore((state) => state.cablePlacementActive);
+  const cablePlacementSourceId = useCyberRangeStore((state) => state.cablePlacementSourceId);
+  const setCablePlacementActive = useCyberRangeStore((state) => state.setCablePlacementActive);
+  const setCablePlacementSourceId = useCyberRangeStore((state) => state.setCablePlacementSourceId);
 
   const [localNodes, setLocalNodes, onNodesChange] = useNodesState<TopologyNode>(canvasNodes);
   const [localEdges, setLocalEdges, onEdgesChange] = useEdgesState<TopologyEdge>(canvasEdges);
@@ -79,10 +83,37 @@ export default function InfrastructureCanvas() {
 
   const handleNodeClick = useCallback(
     (_event: ReactMouseEvent, node: TopologyNode) => {
-      selectNode(node.id);
+      if (!cablePlacementActive) {
+        selectNode(node.id);
+        return;
+      }
+
+      if (!cablePlacementSourceId) {
+        setCablePlacementSourceId(node.id);
+        return;
+      }
+
+      if (cablePlacementSourceId === node.id) {
+        return;
+      }
+
+      const edge: TopologyEdge = {
+        id: formatNodeId('edge'),
+        source: cablePlacementSourceId,
+        target: node.id,
+        type: 'cable',
+      };
+      connectNodes(edge);
+      setCablePlacementSourceId(null);
     },
-    [selectNode],
+    [cablePlacementActive, cablePlacementSourceId, setCablePlacementSourceId, selectNode, connectNodes],
   );
+
+  const handlePaneClick = useCallback(() => {
+    if (cablePlacementActive) {
+      setCablePlacementSourceId(null);
+    }
+  }, [cablePlacementActive, setCablePlacementSourceId]);
 
   const handleDragOver = useCallback((event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -92,7 +123,11 @@ export default function InfrastructureCanvas() {
   const handleDrop = useCallback(
     (event: DragEvent<HTMLDivElement>) => {
       event.preventDefault();
-      const type = event.dataTransfer.getData('application/reactflow') as TopologyNodeType;
+      const type = event.dataTransfer.getData('application/reactflow') as TopologyNodeType | 'cable';
+      if (type === 'cable') {
+        setCablePlacementActive(true);
+        return;
+      }
       if (type !== 'pc' && type !== 'router') {
         return;
       }
@@ -121,7 +156,7 @@ export default function InfrastructureCanvas() {
       };
       placeNode(node);
     },
-    [placeNode],
+    [placeNode, setCablePlacementActive],
   );
 
   return (
@@ -138,6 +173,7 @@ export default function InfrastructureCanvas() {
         onEdgesChange={onEdgesChange}
         onConnect={handleConnect}
         onNodeClick={handleNodeClick}
+        onPaneClick={handlePaneClick}
         onInit={(instance) => {
           reactFlowRef.current = instance;
         }}
