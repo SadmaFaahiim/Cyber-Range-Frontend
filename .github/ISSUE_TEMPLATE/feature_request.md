@@ -1,46 +1,38 @@
 ---
 name: Feature request
-about: Propose new functionality for the Cyber Range GUI
-title: '[feature]: '
-labels: ['enhancement']
-assignees: ''
+about: Suggest a new feature for the Cyber Range GUI
+title: "feat: <short feature title>"
+labels: feature
+assignees: ""
 ---
 
 ## Feature name
 
-<!-- Short, descriptive name of the feature being proposed. -->
+<!-- Clear, short name for the feature. -->
 
-## Workflow step
+## Which part of the workflow it affects
 
-Which part of the 5-step exercise workflow does this affect?
-
-- [ ] Infrastructure
+- [ ] Dashboard
+- [ ] Builder
 - [ ] Topology
-- [ ] Team Selection
-- [ ] Team Tools
 - [ ] Readiness
-- [ ] App shell / Routing
-- [ ] Other (described below)
+- [ ] Shell
+- [ ] Other
 
-## Feature description
+## Description of the feature
 
-<!-- What is the feature, and why is it needed? Describe the problem it solves from the operator's perspective. -->
+<!-- What is the feature, who is it for, and what problem does it solve? -->
 
 ## Acceptance criteria
 
-<!-- Concrete, testable outcomes. Use a checkbox list. Each item should be verifiable independently. -->
-
-- [ ]
-- [ ]
-- [ ]
+- [ ] <!-- Criterion 1, verifiable and testable -->
+- [ ] <!-- Criterion 2 -->
+- [ ] <!-- Criterion 3 -->
 
 ## Design notes
 
-<!-- Mockups, wireframes, component breakdown, or links to the design system tokens (colors, spacing, typography). -->
+<!-- Links to design specs, mockups, design tokens to reuse, or notes on intended UX. -->
 
-## Dependencies
+## Dependencies on other issues or features
 
-<!-- Anything this feature depends on: other issues, PRs, libraries, or data changes. -->
-
-- [ ] No external dependencies
-- [ ] Depends on: <!-- list issues/PRs -->
+<!-- List issue/PR numbers this depends on, or state "None". -->
