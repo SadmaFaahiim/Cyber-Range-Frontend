@@ -53,13 +53,47 @@ export function computeReadiness(nodes: TopologyNode[], edges: TopologyEdge[]): 
   return { status: issues.length === 0 ? 'ready' : 'warning', issues };
 }
 
+export const NODE_SIZE = { width: 120, height: 80 };
+
+export const OVERLAP_THRESHOLD = 20;
+
+export function validateNoOverlap(nodes: TopologyNode[]): boolean {
+  for (let i = 0; i < nodes.length; i += 1) {
+    for (let j = i + 1; j < nodes.length; j += 1) {
+      const a = nodes[i].position;
+      const b = nodes[j].position;
+      const width = NODE_SIZE.width + OVERLAP_THRESHOLD;
+      const height = NODE_SIZE.height + OVERLAP_THRESHOLD;
+      if (Math.abs(a.x - b.x) < width && Math.abs(a.y - b.y) < height) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+export function validateInfrastructureCanvas(nodes: TopologyNode[], edges: TopologyEdge[]): boolean {
+  return nodes.length >= 2 && edges.length >= 1 && validateNoOverlap(nodes);
+}
+
+export interface ReadinessChecks {
+  hasNodes: boolean;
+  hasConnections: boolean;
+  noOverlap: boolean;
+}
+
 export interface ReadinessPayload {
   infrastructure: boolean;
   overall: boolean;
+  checks: ReadinessChecks;
 }
 
 export function validateReadiness(nodes: TopologyNode[], edges: TopologyEdge[]): ReadinessPayload {
-  const report = computeReadiness(nodes, edges);
-  const ready = report.status === 'ready';
-  return { infrastructure: ready, overall: ready };
+  const checks: ReadinessChecks = {
+    hasNodes: nodes.length >= 2,
+    hasConnections: edges.length >= 1,
+    noOverlap: validateNoOverlap(nodes),
+  };
+  const ready = checks.hasNodes && checks.hasConnections && checks.noOverlap;
+  return { infrastructure: ready, overall: ready, checks };
 }
