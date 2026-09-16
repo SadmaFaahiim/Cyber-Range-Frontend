@@ -10,8 +10,9 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-accent text-white hover:bg-sky-600',
-        outline: 'border border-border bg-transparent text-slate-700 hover:bg-slate-50',
-        ghost: 'text-slate-600 hover:bg-slate-100',
+        outline:
+          'border border-border bg-transparent text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-[rgba(23,28,42,0.6)]',
+        ghost: 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-[rgba(23,28,42,0.5)]',
         destructive: 'bg-destructive text-white hover:bg-[#dc2626]',
       },
       size: {

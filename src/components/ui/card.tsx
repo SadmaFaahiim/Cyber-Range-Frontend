@@ -6,7 +6,7 @@ export function CardRoot({ className, ...props }: HTMLAttributes<HTMLDivElement>
   return (
     <div
       className={cn(
-        'rounded-lg border border-white/85 bg-white/60 text-card-foreground shadow-[0_4px_20px_rgba(148,163,184,0.12)] backdrop-blur-[10px]',
+        'rounded-lg border border-panel-border bg-panel-bg text-card-foreground shadow-[0_4px_20px_var(--glass-shadow)] backdrop-blur-[10px]',
         className,
       )}
       {...props}

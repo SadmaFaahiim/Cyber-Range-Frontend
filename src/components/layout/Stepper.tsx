@@ -24,7 +24,7 @@ export default function Stepper() {
             {isActive ? (
               <motion.div
                 layoutId="active-step"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-accent bg-accent text-xs font-semibold text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-accent bg-accent text-xs font-semibold text-white shadow-[0_0_12px_rgba(14,165,233,0.4)]"
               >
                 {stepNumber}
               </motion.div>
@@ -63,9 +63,15 @@ export default function Stepper() {
             </span>
 
             {index < APP_STRINGS.STEPS.length - 1 ? (
-              <span
+              <motion.span
                 aria-hidden="true"
-                className={cn('mx-3 h-0.5 w-8 rounded-full lg:w-12', isComplete ? 'bg-ready' : 'bg-border')}
+                className="mx-3 h-0.5 rounded-full lg:w-12"
+                initial={false}
+                animate={{
+                  width: isComplete ? 48 : 32,
+                  backgroundColor: isComplete ? 'var(--ready)' : 'var(--border)',
+                }}
+                transition={{ type: 'spring', stiffness: 300, damping: 26 }}
               />
             ) : null}
           </li>
