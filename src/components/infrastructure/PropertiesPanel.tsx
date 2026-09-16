@@ -18,7 +18,7 @@ export default function PropertiesPanel() {
 
   if (!node) {
     return (
-      <aside className="flex h-full w-[220px] shrink-0 items-center justify-center border-l border-panel-border bg-panel-bg p-4">
+      <aside className="flex h-full w-[220px] shrink-0 items-center justify-center border-l border-white/80 bg-white/55 p-4 shadow-[-2px_0_12px_rgba(148,163,184,0.1)] backdrop-blur-[12px]">
         <p className="text-center text-sm text-muted-foreground">{APP_STRINGS.PROPERTIES.EMPTY}</p>
       </aside>
     );
@@ -44,7 +44,7 @@ export default function PropertiesPanel() {
   };
 
   return (
-    <aside className="flex h-full w-[220px] shrink-0 flex-col gap-4 overflow-y-auto border-l border-panel-border bg-panel-bg p-4">
+    <aside className="flex h-full w-[220px] shrink-0 flex-col gap-4 overflow-y-auto border-l border-white/80 bg-white/55 p-4 shadow-[-2px_0_12px_rgba(148,163,184,0.1)] backdrop-blur-[12px]">
       <div className="flex flex-col gap-1.5">
         <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           {APP_STRINGS.PROPERTIES.TITLE}
@@ -55,29 +55,29 @@ export default function PropertiesPanel() {
       </div>
 
       <label className="flex flex-col gap-1.5">
-        <span className="text-xs font-medium text-muted-foreground">{APP_STRINGS.PROPERTIES.NAME}</span>
+        <span className="text-xs font-medium text-slate-700">{APP_STRINGS.PROPERTIES.NAME}</span>
         <input
           value={node.data.label}
           onChange={handleLabelChange}
-          className="h-8 w-full rounded-md border border-panel-border bg-app-bg px-2 text-sm text-foreground outline-none transition-colors focus:border-accent"
+          className="h-8 w-full rounded-md border border-slate-200/90 bg-white/80 px-2 text-sm text-foreground outline-none transition-colors focus:border-accent"
         />
       </label>
 
       <div className="flex flex-col gap-1.5">
-        <span className="text-xs font-medium text-muted-foreground">{APP_STRINGS.PROPERTIES.CONNECTIONS}</span>
+        <span className="text-xs font-medium text-slate-700">{APP_STRINGS.PROPERTIES.CONNECTIONS}</span>
         {connections.length > 0 ? (
           <ul className="flex flex-col gap-1">
             {connections.map((label) => (
               <li
                 key={label}
-                className="rounded border border-panel-border bg-app-bg px-2 py-1 font-mono text-xs text-foreground"
+                className="rounded border border-slate-200/90 bg-white/80 px-2 py-1 font-mono text-xs text-slate-700"
               >
                 {label}
               </li>
             ))}
           </ul>
         ) : (
-          <p className="text-xs text-muted-foreground">{APP_STRINGS.PROPERTIES.NO_CONNECTIONS}</p>
+          <p className="text-xs text-slate-500">{APP_STRINGS.PROPERTIES.NO_CONNECTIONS}</p>
         )}
       </div>
 

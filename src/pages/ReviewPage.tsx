@@ -40,17 +40,17 @@ export default function ReviewPage() {
       <CardRoot className="w-full max-w-md">
         <CardContent className="flex items-center justify-around p-6">
           <div className="flex flex-col items-center gap-1">
-            <span data-testid="node-count" className="text-2xl font-semibold text-foreground">
+            <span data-testid="node-count" className="text-2xl font-semibold text-slate-700">
               {canvasNodes.length}
             </span>
-            <span className="text-xs uppercase tracking-wider text-muted-foreground">{nodesLabel}</span>
+            <span className="text-xs uppercase tracking-wider text-slate-500">{nodesLabel}</span>
           </div>
           <Separator orientation="vertical" className="h-10" />
           <div className="flex flex-col items-center gap-1">
-            <span data-testid="edge-count" className="text-2xl font-semibold text-foreground">
+            <span data-testid="edge-count" className="text-2xl font-semibold text-slate-700">
               {canvasEdges.length}
             </span>
-            <span className="text-xs uppercase tracking-wider text-muted-foreground">{edgesLabel}</span>
+            <span className="text-xs uppercase tracking-wider text-slate-500">{edgesLabel}</span>
           </div>
           <Separator orientation="vertical" className="h-10" />
           <Badge variant={report.overall ? 'success' : 'warning'}>

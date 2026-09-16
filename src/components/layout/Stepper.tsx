@@ -65,7 +65,7 @@ export default function Stepper() {
             {index < APP_STRINGS.STEPS.length - 1 ? (
               <span
                 aria-hidden="true"
-                className={cn('mx-3 h-0.5 w-8 rounded-full lg:w-12', isComplete ? 'bg-ready' : 'bg-panel-border')}
+                className={cn('mx-3 h-0.5 w-8 rounded-full lg:w-12', isComplete ? 'bg-ready' : 'bg-border')}
               />
             ) : null}
           </li>
