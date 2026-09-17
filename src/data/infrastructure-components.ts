@@ -10,6 +10,10 @@ export const DEFAULT_NODE_SIZE = { width: 120, height: 80 };
 
 export const SNAP_GRID: [number, number] = [20, 20];
 
+export const MIN_CABLE_LENGTH = 80;
+
+export const PORT_SNAP_RADIUS = 30;
+
 export const INFRASTRUCTURE_COMPONENTS: PaletteComponent[] = [
   {
     type: 'pc',

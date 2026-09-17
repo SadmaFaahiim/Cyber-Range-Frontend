@@ -1,23 +1,23 @@
-import { Handle, type NodeProps, Position } from '@xyflow/react';
-import { Network } from 'lucide-react';
+import type { NodeProps } from '@xyflow/react';
 import { memo } from 'react';
 import useCyberRangeStore from '@/store/cyberRangeStore';
 import type { TopologyNode } from '@/types/topology';
 
+import NodePorts from './shared/NodePorts';
 import NodeShell from './shared/NodeShell';
+import RouterLogo from './shared/RouterLogo';
 
 function RouterNodeComponent({ data, selected, id }: NodeProps<TopologyNode>) {
-  const cableSourceId = useCyberRangeStore((state) => state.cablePlacementSourceId);
-  const isCableSource = id === cableSourceId;
+  const pendingCable = useCyberRangeStore((state) => state.pendingCable);
+  const isCableAnchor = pendingCable?.startAnchor?.nodeId === id || pendingCable?.endAnchor?.nodeId === id;
 
   return (
     <>
-      <Handle type="target" position={Position.Top} />
-      <NodeShell selected={selected || isCableSource}>
-        <Network className="text-accent" size={22} aria-hidden="true" />
+      <NodePorts />
+      <NodeShell selected={selected || isCableAnchor}>
+        <RouterLogo iconSize={16} />
         <span className="font-mono text-xs text-muted-foreground">{data.label}</span>
       </NodeShell>
-      <Handle type="source" position={Position.Bottom} />
     </>
   );
 }

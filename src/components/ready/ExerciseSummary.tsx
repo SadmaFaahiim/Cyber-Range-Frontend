@@ -8,16 +8,8 @@ import { edgeTypes, nodeTypes } from '@/components/topology/flowTypes';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { APP_STRINGS } from '@/lib/strings';
+import { isSignalOk } from '@/lib/validation';
 import useCyberRangeStore from '@/store/cyberRangeStore';
-
-function isSignalOk(source: string, target: string, nodes: Node[]): boolean {
-  const sourceNode = nodes.find((n) => n.id === source);
-  const targetNode = nodes.find((n) => n.id === target);
-  if (!sourceNode || !targetNode) {
-    return false;
-  }
-  return sourceNode.type !== targetNode.type;
-}
 
 export default function ExerciseSummary() {
   const navigate = useNavigate();
@@ -32,7 +24,9 @@ export default function ExerciseSummary() {
   );
 
   const linkedNodes = canvasNodes.map((node): Node => ({ ...node, data: { ...node.data, label: node.data.label } }));
-  const linkedEdges = canvasEdges.map((edge): Edge => ({ ...edge, type: 'cable' }));
+  const linkedEdges = canvasEdges.map(
+    (edge): Edge => ({ ...edge, type: 'cable', data: { ...edge.data, readinessPreview: true } }),
+  );
 
   const signalOkCount = canvasEdges.filter((edge) => isSignalOk(edge.source, edge.target, canvasNodes)).length;
   const signalWarnCount = canvasEdges.length - signalOkCount;
