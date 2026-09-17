@@ -126,4 +126,42 @@ describe('cyberRangeStore', () => {
     expect(store.result.current.currentStep).toBe(1);
     expect(store.result.current.selectedNodeId).toBeNull();
   });
+
+  it('setPcOperatingSystem updates node.data.operatingSystem for matching id only', () => {
+    act(() => {
+      store.result.current.placeNode(makeNode('pc-01'));
+      store.result.current.placeNode(makeNode('pc-02'));
+      store.result.current.setPcOperatingSystem('pc-01', 'windows-11');
+    });
+    const pc1 = store.result.current.canvasNodes.find((item) => item.id === 'pc-01');
+    const pc2 = store.result.current.canvasNodes.find((item) => item.id === 'pc-02');
+    expect(pc1?.data.operatingSystem).toBe('windows-11');
+    expect(pc2?.data.operatingSystem).toBeUndefined();
+  });
+
+  it('pendingCable lifecycle: start, update an end, set an anchor, cancel', () => {
+    act(() => {
+      store.result.current.startPendingCable({ x: 0, y: 0 }, { x: 80, y: 0 });
+    });
+    expect(store.result.current.pendingCable).toMatchObject({
+      start: { x: 0, y: 0 },
+      end: { x: 80, y: 0 },
+      startAnchor: null,
+      endAnchor: null,
+    });
+
+    act(() => {
+      store.result.current.updatePendingCableEnd('end', { x: 120, y: 40 });
+      store.result.current.setPendingCableAnchor('start', { nodeId: 'pc-01', side: 'right' });
+    });
+    expect(store.result.current.pendingCable).toMatchObject({
+      end: { x: 120, y: 40 },
+      startAnchor: { nodeId: 'pc-01', side: 'right' },
+    });
+
+    act(() => {
+      store.result.current.cancelPendingCable();
+    });
+    expect(store.result.current.pendingCable).toBeNull();
+  });
 });

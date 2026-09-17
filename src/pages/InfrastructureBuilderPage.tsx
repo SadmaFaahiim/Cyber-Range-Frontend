@@ -8,7 +8,7 @@ import PropertiesPanel from '@/components/infrastructure/PropertiesPanel';
 import { Button } from '@/components/ui/button';
 import { pageTransition } from '@/lib/motion';
 import { APP_STRINGS } from '@/lib/strings';
-import { validateInfrastructureCanvas } from '@/lib/validation';
+import { allPcsHaveOs, validateInfrastructureCanvas } from '@/lib/validation';
 import useCyberRangeStore from '@/store/cyberRangeStore';
 
 export default function InfrastructureBuilderPage() {
@@ -16,10 +16,10 @@ export default function InfrastructureBuilderPage() {
   const canvasNodes = useCyberRangeStore((state) => state.canvasNodes);
   const canvasEdges = useCyberRangeStore((state) => state.canvasEdges);
   const setStep = useCyberRangeStore((state) => state.setStep);
-  const cablePlacementActive = useCyberRangeStore((state) => state.cablePlacementActive);
-  const cablePlacementSourceId = useCyberRangeStore((state) => state.cablePlacementSourceId);
-  const setCablePlacementActive = useCyberRangeStore((state) => state.setCablePlacementActive);
+  const pendingCable = useCyberRangeStore((state) => state.pendingCable);
+  const cancelPendingCable = useCyberRangeStore((state) => state.cancelPendingCable);
   const valid = validateInfrastructureCanvas(canvasNodes, canvasEdges);
+  const missingOs = !allPcsHaveOs(canvasNodes);
 
   const handleContinue = () => {
     if (!valid) {
@@ -45,22 +45,20 @@ export default function InfrastructureBuilderPage() {
 
       <footer className="flex h-14 shrink-0 items-center justify-between gap-4 border-t border-panel-border bg-panel-bg px-6 shadow-[0_-2px_12px_var(--glass-shadow)] backdrop-blur-[8px]">
         <div className="min-w-0 flex-1">
-          {cablePlacementActive ? (
-            <p className="truncate text-sm font-medium text-accent">
-              {cablePlacementSourceId ? APP_STRINGS.BUILDER.CABLE_PICK_TARGET : APP_STRINGS.BUILDER.CABLE_PICK_SOURCE}
-            </p>
+          {pendingCable ? (
+            <p className="truncate text-sm font-medium text-accent">{APP_STRINGS.BUILDER.CABLE_IN_PROGRESS}</p>
           ) : valid ? (
             <p className="text-sm text-ready">{APP_STRINGS.BUILDER.READY_TEXT}</p>
           ) : (
             <p className="flex items-center gap-2 text-sm text-warning">
               <AlertTriangle className="h-4 w-4 shrink-0" aria-hidden="true" />
-              {APP_STRINGS.BUILDER.NO_NODES}
+              {missingOs ? APP_STRINGS.BUILDER.MISSING_OS : APP_STRINGS.BUILDER.NO_NODES}
             </p>
           )}
         </div>
 
-        {cablePlacementActive ? (
-          <Button variant="outline" size="sm" onClick={() => setCablePlacementActive(false)}>
+        {pendingCable ? (
+          <Button variant="outline" size="sm" onClick={cancelPendingCable}>
             {APP_STRINGS.BUILDER.CABLE_CANCEL}
           </Button>
         ) : (
