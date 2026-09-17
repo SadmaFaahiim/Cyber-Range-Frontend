@@ -57,6 +57,8 @@ export const NODE_SIZE = { width: 120, height: 80 };
 
 export const OVERLAP_THRESHOLD = 20;
 
+export const MIN_PC_DISTANCE = 160;
+
 export function validateNoOverlap(nodes: TopologyNode[]): boolean {
   for (let i = 0; i < nodes.length; i += 1) {
     for (let j = i + 1; j < nodes.length; j += 1) {
@@ -72,8 +74,12 @@ export function validateNoOverlap(nodes: TopologyNode[]): boolean {
   return true;
 }
 
+export function allPcsHaveOs(nodes: TopologyNode[]): boolean {
+  return nodes.filter((node) => node.data.type === 'pc').every((node) => node.data.operatingSystem != null);
+}
+
 export function validateInfrastructureCanvas(nodes: TopologyNode[], edges: TopologyEdge[]): boolean {
-  return nodes.length >= 2 && edges.length >= 1 && validateNoOverlap(nodes);
+  return nodes.length >= 2 && edges.length >= 1 && validateNoOverlap(nodes) && allPcsHaveOs(nodes);
 }
 
 export interface ReadinessChecks {
@@ -86,6 +92,15 @@ export interface ReadinessPayload {
   infrastructure: boolean;
   overall: boolean;
   checks: ReadinessChecks;
+}
+
+export function isSignalOk(sourceId: string, targetId: string, nodes: TopologyNode[]): boolean {
+  const sourceNode = nodes.find((node) => node.id === sourceId);
+  const targetNode = nodes.find((node) => node.id === targetId);
+  if (!sourceNode || !targetNode) {
+    return false;
+  }
+  return sourceNode.data.type !== targetNode.data.type;
 }
 
 export function validateReadiness(nodes: TopologyNode[], edges: TopologyEdge[]): ReadinessPayload {

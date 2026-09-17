@@ -1,14 +1,20 @@
 import { describe, expect, it } from 'vitest';
 
-import { validateInfrastructureCanvas, validateNoOverlap, validateReadiness } from '@/lib/validation';
+import { allPcsHaveOs, validateInfrastructureCanvas, validateNoOverlap, validateReadiness } from '@/lib/validation';
+import type { OperatingSystem } from '@/types/pc';
 import type { TopologyEdge, TopologyNode } from '@/types/topology';
 
-function makeNode(id: string, x: number, y: number): TopologyNode {
+function makeNode(
+  id: string,
+  x: number,
+  y: number,
+  operatingSystem: OperatingSystem | null = 'windows-11',
+): TopologyNode {
   return {
     id,
     type: 'pc',
     position: { x, y },
-    data: { label: 'PC', type: 'pc' },
+    data: { label: 'PC', type: 'pc', operatingSystem },
   };
 }
 
@@ -49,6 +55,36 @@ describe('validateInfrastructureCanvas', () => {
   it('returns true when 3 nodes and 2 edges', () => {
     const nodes = [makeNode('a', 0, 0), makeRouter('b', 300, 300), makeNode('c', 600, 300)];
     const edges = [makeEdge('e1', 'a', 'b'), makeEdge('e2', 'b', 'c')];
+    expect(validateInfrastructureCanvas(nodes, edges)).toBe(true);
+  });
+});
+
+describe('allPcsHaveOs', () => {
+  it('returns true when there are no PCs', () => {
+    expect(allPcsHaveOs([makeRouter('b', 0, 0)])).toBe(true);
+  });
+
+  it('returns true when every PC has an operating system', () => {
+    const nodes = [makeNode('a', 0, 0, 'windows-11'), makeNode('c', 300, 0, 'kali-linux')];
+    expect(allPcsHaveOs(nodes)).toBe(true);
+  });
+
+  it('returns false when a PC has no operating system selected', () => {
+    const nodes = [makeNode('a', 0, 0, 'windows-11'), makeNode('c', 300, 0, null)];
+    expect(allPcsHaveOs(nodes)).toBe(false);
+  });
+});
+
+describe('validateInfrastructureCanvas with operating systems', () => {
+  it('returns false when a PC is missing an operating system, even with enough nodes and edges', () => {
+    const nodes = [makeNode('a', 0, 0, null), makeRouter('b', 300, 300)];
+    const edges = [makeEdge('e1', 'a', 'b')];
+    expect(validateInfrastructureCanvas(nodes, edges)).toBe(false);
+  });
+
+  it('returns true once every PC has an operating system selected', () => {
+    const nodes = [makeNode('a', 0, 0, 'linux-mint'), makeRouter('b', 300, 300)];
+    const edges = [makeEdge('e1', 'a', 'b')];
     expect(validateInfrastructureCanvas(nodes, edges)).toBe(true);
   });
 });
